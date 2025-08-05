@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+		   elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="TEJDCDEnteteDeclaration.xsd"/>
+	<xs:element name="section7">
+		<xs:annotation>
+			<xs:documentation>Déclaration des montants / Déclaration de LIQUIDITE PORTEFEUILLE</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="VersionDocument" type="T_VersionDoc" minOccurs="1"/>
+				<xs:element name="Entete" type="T_Entete" minOccurs="1"/>
+				<xs:element name="ListeComptes">
+					<xs:complexType>
+						<xs:sequence maxOccurs="unbounded">
+							<xs:element name="Compte">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="leCompte" minOccurs="1">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="NumCompte" type="T_AlphaNum" minOccurs="1"/>
+													<xs:element name="TypeCompte" type="T_TypeCompteVM4" minOccurs="1"/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="IdentiteProprietaireCompte" minOccurs="1">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="NomPrenomRS" type="T_ChaineTexte250" minOccurs="1"/>
+													<xs:element name="TypeIdent" type="T_TypeIdent" minOccurs="0"/>
+													<xs:element name="LibelleCodType" type="xs:string" minOccurs="0"/>
+													<xs:element name="NumIdent" type="xs:string" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>NumIdent doit être non vide si TypeIdent = '6'</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="DateNaissance" type="T_DateJJMMAAAA" minOccurs="0"/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="ObligationInfoPub" minOccurs="1">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="DateInformationTitulaire" type="T_DateJJMMAAAA" minOccurs="0"/>
+													<xs:element name="DatePublicationJO" type="T_DateJJMMAAAA" minOccurs="1"/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="PrescriptionCompte" minOccurs="1">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="DateDerniereOperation" type="T_DateJJMMAAAA" minOccurs="0"/>
+													<xs:element name="DatePrescriptionCompte" type="T_DateJJMMAAAA" minOccurs="1"/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="Devise" type="T_TypeDevise" fixed="788" minOccurs="1"/>
+										<xs:element name="Montants" type="T_Montant" minOccurs="1"/>
+										<xs:element name="TypeActionDepot" type="T_TypeAction" minOccurs="1"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="DetailsDevise" minOccurs="1" maxOccurs="1">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Devise" type="T_TypeDevise" fixed="788" minOccurs="1"/>
+							<xs:element name="NombreLigne" type="xs:positiveInteger" minOccurs="1"/>
+							<xs:element name="MontantTotal" type="T_Montant" minOccurs="1"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

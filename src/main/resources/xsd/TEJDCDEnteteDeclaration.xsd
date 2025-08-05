@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" elementFormDefault="qualified" attributeFormDefault="unqualified" vc:minVersion="1.1">
+	<xs:complexType name="T_Entete">
+		<xs:annotation>
+			<xs:documentation>En-tête de la déclaration des comptes dormants</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="MatriculeFiscal" type="T_MatriculeFiscal" minOccurs="1"/>
+			<xs:element name="RaisonSocial" type="T_ChaineTexte250" minOccurs="1"/>
+			<xs:element name="Exercice" type="T_Annee" minOccurs="1"/>
+			<xs:element name="ActeDeDepot" type="T_ActeDeDepot" minOccurs="1"/>
+			<xs:element name="ReferenceDeclaration" type="T_RefDec" minOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="T_VersionDoc">
+		<xs:annotation>
+			<xs:documentation>
+		  Ce type représente la version du document, fixée à "version-1.0" conformément à la convention de versionnement sémantique.
+		</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="version-1.0"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_MatriculeFiscal">
+		<xs:annotation>
+			<xs:documentation>
+				Référence alphanumérique : 7 chiffres (≠ 0000000) suivis d’une lettre majuscule (A-Z),
+				Exemple valide : 1234567A, 0000001Z, etc.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="^[1-9][0-9]{6}[A-HJ-NP-Z]$"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_ChaineTexte250">
+		<xs:annotation>
+			<xs:documentation>
+		  Chaîne de texte de 250 caractères maximum, uniquement lettres (accentuées ou non) et espaces. Chiffres et caractères spéciaux interdits.
+		</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="250"/>
+			<xs:whiteSpace value="preserve"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_Annee">
+		<xs:annotation>
+			<xs:documentation>
+				Exercice au titre duquel les comptes, valeurs mobilières, contrats d’assurance, etc., seront déclarés.
+				L'exercice doit être ≥ 2024.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:gYear">
+			<xs:minInclusive value="2024"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_ActeDeDepot">
+		<xs:annotation>
+			<xs:documentation>Actes de dépôts</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:token">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="1"/>
+			<xs:enumeration value="0"/>
+			<!-- declaration spontannée (initiale)  -->
+			<xs:enumeration value="1"/>
+			<!-- declaration rectificative -->
+			<xs:enumeration value="2"/>
+			<!-- declaration déposée suite intervention des services de contrôle  -->
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_RefDec">
+		<xs:annotation>
+			<xs:documentation>
+				Référence de décision : entier positif (max 7 chiffres), différent de 0
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="1"/>
+			<xs:maxInclusive value="9999999"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_TypeAction">
+		<xs:annotation>
+			<xs:documentation>Type de l'action de dépôt : A (ajout), M (modification), I (inchangé).
+                           Seules les majuscules sont autorisées.
+        </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:token">
+			<xs:length value="1"/>
+			<xs:enumeration value="A"/>
+			<xs:enumeration value="M"/>
+			<xs:enumeration value="I"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_TypeDevise">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="788"/>
+			<!-- TND = Dinar Tunisien -->
+			<xs:enumeration value="978"/>
+			<!-- EUR = Euro -->
+			<xs:enumeration value="840"/>
+			<!-- USD = Dollar des États-Unis -->
+			<xs:enumeration value="826"/>
+			<!-- GBP = Livre Sterling -->
+			<xs:enumeration value="392"/>
+			<!-- JPY = Yen Japonais -->
+			<xs:enumeration value="756"/>
+			<!-- CHF = Franc Suisse -->
+			<xs:enumeration value="124"/>
+			<!-- CAD = Dollar Canadien -->
+			<xs:enumeration value="414"/>
+			<!-- KWD = Dinar Koweïtien -->
+			<xs:enumeration value="682"/>
+			<!-- SAR = Riyal Saoudien -->
+			<xs:enumeration value="784"/>
+			<!-- AED = Dirham EAU -->
+			<xs:enumeration value="634"/>
+			<!-- QAR = Riyal Qatari -->
+			<xs:enumeration value="048"/>
+			<!-- BHD = Dinar Bahreïni -->
+			<xs:enumeration value="156"/>
+			<!-- CNY = Yuan Renminbi Chinois -->
+			<xs:enumeration value="434"/>
+			<!-- LYD = Dinar Libyen -->
+			<xs:enumeration value="752"/>
+			<!-- SEK = Couronne suédoise -->
+			<xs:enumeration value="208"/>
+			<!-- DKK = Couronne danoise -->
+			<xs:enumeration value="578"/>
+			<!-- NOK = Couronne norvégienne -->
+			<xs:enumeration value="008"/>
+			<!-- ALL = Lek Albanais -->
+			<xs:enumeration value="036"/>
+			<!-- AUD = Dollar Australien -->
+			<xs:enumeration value="040"/>
+			<!-- ATS = Schilling Autrichien -->
+			<xs:enumeration value="056"/>
+			<!-- BEF = Franc Belge -->
+			<xs:enumeration value="220"/>
+			<!-- SCO = Livre Écossaise (non officiel) -->
+			<xs:enumeration value="246"/>
+			<!-- FIM = Mark Finlandais -->
+			<xs:enumeration value="250"/>
+			<!-- FRF = Franc Français -->
+			<xs:enumeration value="280"/>
+			<!-- DEM = Deutsche Mark -->
+			<xs:enumeration value="300"/>
+			<!-- GRD = Drachme Grecque -->
+			<xs:enumeration value="328"/>
+			<!-- GYD = Dollar Guyanais -->
+			<xs:enumeration value="356"/>
+			<!-- INR = Roupie Indienne -->
+			<xs:enumeration value="372"/>
+			<!-- IEP = Livre Irlandaise -->
+			<xs:enumeration value="380"/>
+			<!-- ITL = Lire Italienne -->
+			<xs:enumeration value="410"/>
+			<!-- KRW = Won Sud-Coréen -->
+			<xs:enumeration value="422"/>
+			<!-- LBP = Livre Libanaise -->
+			<xs:enumeration value="442"/>
+			<!-- LUF = Franc Luxembourgeois -->
+			<xs:enumeration value="478"/>
+			<!-- MRU = Ouguiya Mauritanienne -->
+			<xs:enumeration value="504"/>
+			<!-- MAD = Dirham Marocain -->
+			<xs:enumeration value="528"/>
+			<!-- NLG = Florin Néerlandais -->
+			<xs:enumeration value="599"/>
+			<!-- XAF = Unité de Compte Africaine (hypothétique) -->
+			<xs:enumeration value="600"/>
+			<!-- PYG = Guarani du Paraguay -->
+			<xs:enumeration value="620"/>
+			<!-- PTE = Escudo Portugais -->
+			<xs:enumeration value="724"/>
+			<!-- ESP = Peseta Espagnole -->
+			<xs:enumeration value="760"/>
+			<!-- SYP = Livre Syrienne -->
+			<xs:enumeration value="792"/>
+			<!-- TRY = Livre Turque -->
+			<xs:enumeration value="810"/>
+			<!-- RUB = Rouble Russe -->
+			<xs:enumeration value="818"/>
+			<!-- EGP = Livre Égyptienne -->
+			<xs:enumeration value="890"/>
+			<!-- YUD = Dinar Yougoslave -->
+			<xs:enumeration value="954"/>
+			<!-- XEU = Unité de Compte Euro (ancienne) -->
+			<xs:enumeration value="955"/>
+			<!-- XBA = Unité Européenne Composite -->
+			<xs:enumeration value="956"/>
+			<!-- XBB = Unité Monétaire Européenne -->
+			<xs:enumeration value="960"/>
+			<!-- XDR = Droits de Tirage Spéciaux -->
+			<xs:enumeration value="992"/>
+			<!-- BEF_FIN = Franc Belge Financier (non officiel) -->
+			<xs:enumeration value="993"/>
+			<!-- BEF_CONV = Franc Belge Convertible (non officiel) -->
+			<xs:enumeration value="X01"/>
+			<!-- XDI = Dinar Islamique (non officiel) -->
+			<xs:enumeration value="X70"/>
+			<!-- SCO_ALT = Livre Écossaise (alternative) -->
+			<xs:enumeration value="X71"/>
+			<!-- NIR = Livre de l’Irlande du Nord (non officiel) -->
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_Montant">
+		<xs:annotation>
+			<xs:documentation>
+				   Montant strictement supérieur à 0.
+				   Montant refusé : (0, 0.00, 0.000) ou (1.0, 12.0, 1.2)
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="(0[.,]0*([1-9]\d*))|([1-9]\d{0,14}([.,]\d{2,3})?)"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_NumCompte">
+		<xs:annotation>
+			<xs:documentation>
+			  Numéro de compte bancaire ou postal composé exactement de 20 chiffres.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="0{0,19}[1-9]\d{0,19}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_AlphaNum">
+		<xs:annotation>
+			<xs:documentation>
+			 Numéro composé d’au moins 1 et au plus 20 caractères alphanumériques (lettres et chiffres). 
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[A-Za-z0-9\-/]{1,20}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_TypeCompteVM5">
+		<xs:annotation>
+			<xs:documentation>
+		  Nature du compte :
+		  "1" : Compte ordinaire
+		  "2" : Compte de gestion
+		  "3" : Compte épargne titre
+		</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:token">
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_TypeCompteVM4">
+		<xs:annotation>
+			<xs:documentation>
+		  Nature du compte :
+		  "1" : Compte libre
+		  "2" : Compte géré
+		  "3" : Compte épargne action
+		</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:token">
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_TypeIdent">
+		<xs:annotation>
+			<xs:documentation>Type Identifiant: "1" (Matricule Fiscal), "2" (CIN), "3" (Carte Sejour), "4" (Passeport), "5" (Registre de Commerce), "6" (Autres)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:byte">
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="4"/>
+			<xs:enumeration value="5"/>
+			<xs:enumeration value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_CategContrat">
+		<xs:annotation>
+			<xs:documentation>Catégories de contrats: "13-1" : assurance vie et "13-2": capitalisation.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="4"/>
+			<xs:enumeration value="13-1"/>
+			<xs:enumeration value="13-2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_CategorieValMob">
+		<xs:annotation>
+			<xs:documentation>categorie de la valeur mobiliere "1": part FCP et "2" : Action SICAV</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_ValMob">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="1"/>
+			<!-- Actions -->
+			<xs:enumeration value="2"/>
+			<!-- Actions à dividende prioritaire sans droit de vote -->
+			<xs:enumeration value="3"/>
+			<!-- Certificats d'investissement -->
+			<xs:enumeration value="4"/>
+			<!-- Obligations -->
+			<xs:enumeration value="5"/>
+			<!-- Obligations convertibles en actions -->
+			<xs:enumeration value="6"/>
+			<!-- Titres participatifs -->
+			<xs:enumeration value="7"/>
+			<!-- Bons du Trésor -->
+			<xs:enumeration value="8"/>
+			<!-- Parts des organismes de placement collectif -->
+			<xs:enumeration value="9"/>
+			<!-- Droits rattachés aux valeurs mobilières précitées -->
+			<xs:enumeration value="10"/>
+			<!-- Autres -->
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_PourcentageDecimal">
+		<xs:restriction base="xs:decimal">
+			<xs:minInclusive value="0.0"/>
+			<xs:maxInclusive value="100.0"/>
+			<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_DateJJMMAAAA">
+		<xs:restriction base="xs:token">
+			<xs:pattern value="(31/(0[13578]|1[02])/((19|20)\d{2}))|((0[1-9]|[12]\d|30)/(0[13-9]|1[0-2])/((19|20)\d{2}))|((0[1-9]|1\d|2[0-8])/02/((19|20)\d{2}))|(29/02/((19(04|08|[2468][048]|[13579][26]))|(2000)|(20(04|08|[2468][048]|[13579][26]))))"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_TypeCompte">
+		<xs:annotation>
+			<xs:documentation>
+      Type de compte autorisé pour la déclaration :
+        1 = Compte courant
+        2 = Compte de dépôts
+        3 = Compte de paiement
+        4 = Compte de dépôts d’investissement
+        5 = Compte d’épargne de toutes sortes
+        6 = Compte à terme et autres roduits assimilés
+        7 = Autres comptes ouverts en dinars tunisiens
+        8 = Autres comptes ouverts en devises
+        9 = Autres
+    </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:byte">
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="4"/>
+			<xs:enumeration value="5"/>
+			<xs:enumeration value="6"/>
+			<xs:enumeration value="7"/>
+			<xs:enumeration value="8"/>
+			<xs:enumeration value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_MotifEcheance">
+		<xs:annotation>
+			<xs:documentation>
+		  Motif de l'échéance :
+			1 = Décès
+			2 = Clôture de contrat
+			3 = Autre
+		</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_ChaineNonVide">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="\S+"/>
+			<!-- au moins un caractère -->
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

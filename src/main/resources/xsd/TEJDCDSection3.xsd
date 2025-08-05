@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+		   elementFormDefault="qualified"
+		   attributeFormDefault="unqualified">
+	<xs:include schemaLocation="TEJDCDEnteteDeclaration.xsd"/>
+
+	<xs:element name="section3">
+		<xs:annotation>
+			<xs:documentation>Créances échues et résultantes des contrats d’assurance vie et des contrats de constitution de patrimoine</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="VersionDocument" type="T_VersionDoc" minOccurs="1"/>
+				<xs:element name="Entete" type="T_Entete" minOccurs="1"/>
+				<xs:element name="ListeContrats">
+					<xs:complexType>
+						<xs:sequence maxOccurs="unbounded">
+							<xs:element name="Contrat">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="ContratsAssuranceConstitutionPat" minOccurs="1">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="NumContrat" type="T_AlphaNum" minOccurs="1"/>
+													<xs:element name="CategContrat" type="T_CategContrat" minOccurs="1"/>
+													<xs:element name="NomCommercialContrat" type="T_ChaineTexte250" minOccurs="1"/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="SouscripteurDeContratAdh" minOccurs="1">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="NomPrenomRS" type="T_ChaineTexte250" minOccurs="1"/>
+													<xs:element name="TypeIdent" type="T_TypeIdent" minOccurs="0"/>
+													<xs:element name="LibelleCodType" type="xs:string" minOccurs="0"/>
+													<xs:element name="NumIdent" type="xs:string" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>NumIdent doit être non vide si TypeIdent = '6'</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="DateNaissance" type="T_DateJJMMAAAA" minOccurs="0"/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="BeneficiairesContrats" minOccurs="1">
+											<xs:complexType>
+												<xs:sequence maxOccurs="unbounded">
+													<xs:element name="Beneficiaire" minOccurs="1">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="NomPrenomRS" type="xs:string" minOccurs="1"/>
+																<xs:element name="TypeIdent" type="T_TypeIdent" minOccurs="0"/>
+																<xs:element name="LibelleCodType" type="xs:string" minOccurs="0"/>
+																<xs:element name="NumIdent" type="xs:string" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>NumIdent doit être non vide si TypeIdent = '6'</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+																<xs:element name="DateNaissance" type="T_DateJJMMAAAA" minOccurs="0"/>
+																<xs:element name="Part" type="T_PourcentageDecimal" minOccurs="0"/>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="Exigible" minOccurs="1">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="MotifEcheance" type="T_MotifEcheance" minOccurs="1"/>
+													<xs:element name="LibExig" type="xs:string" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>LibExig doit exister et être non vide si MotifEcheance = '3'; sinon, absent</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="DateEcheance" type="T_DateJJMMAAAA" minOccurs="1"/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="ObligationInfoPub" minOccurs="1">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="DateInformationTitulaire" type="T_DateJJMMAAAA" minOccurs="0"/>
+													<xs:element name="DatePublicationJO" type="T_DateJJMMAAAA" minOccurs="1"/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="DecheanceAuTerme" minOccurs="1">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="TypeDerniereOpRecLg" type="xs:string" minOccurs="0"/>
+													<xs:element name="DateDerniereOperation" type="T_DateJJMMAAAA" minOccurs="0"/>
+													<xs:element name="DatePrescriptionCompte" type="T_DateJJMMAAAA" minOccurs="1"/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="Devise" type="T_TypeDevise" minOccurs="1" fixed="788"/>
+										<xs:element name="MontantTransfert" type="T_Montant" minOccurs="1"/>
+										<xs:element name="TypeActionDepot" type="T_TypeAction" minOccurs="1"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="DetailsDevise" maxOccurs="1" minOccurs="1">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Devise" type="T_TypeDevise" minOccurs="1" fixed="788"/>
+							<xs:element name="NombreLigne" type="xs:positiveInteger" minOccurs="1"/>
+							<xs:element name="MontantTotal" type="T_Montant" minOccurs="1"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

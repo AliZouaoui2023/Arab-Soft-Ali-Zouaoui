@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<jaxb:bindings version="3.0" xmlns:jaxb="https://jakarta.ee/xml/ns/jaxb">
+  <!--
+
+Ce fichier a été généré par Eclipse Implementation of JAXB, v4.0.4 
+Voir https://eclipse-ee4j.github.io/jaxb-ri 
+Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
+Généré le : 2025.08.05 à 03:45:10 AM CEST
+  -->
+  <jaxb:bindings scd="x-schema::" if-exists="true" auto-acknowledge="true">
+    <jaxb:schemaBindings map="false">
+      <jaxb:package name="generated"/>
+    </jaxb:schemaBindings>
+    <jaxb:bindings scd="section1" if-exists="true" auto-acknowledge="true">
+      <jaxb:class ref="generated.Section1"/>
+    </jaxb:bindings>
+    <jaxb:bindings scd="section2" if-exists="true" auto-acknowledge="true">
+      <jaxb:class ref="generated.Section2"/>
+    </jaxb:bindings>
+    <jaxb:bindings scd="section3" if-exists="true" auto-acknowledge="true">
+      <jaxb:class ref="generated.Section3"/>
+    </jaxb:bindings>
+    <jaxb:bindings scd="section4" if-exists="true" auto-acknowledge="true">
+      <jaxb:class ref="generated.Section4"/>
+    </jaxb:bindings>
+    <jaxb:bindings scd="section5" if-exists="true" auto-acknowledge="true">
+      <jaxb:class ref="generated.Section5"/>
+    </jaxb:bindings>
+    <jaxb:bindings scd="section6" if-exists="true" auto-acknowledge="true">
+      <jaxb:class ref="generated.Section6"/>
+    </jaxb:bindings>
+    <jaxb:bindings scd="section7" if-exists="true" auto-acknowledge="true">
+      <jaxb:class ref="generated.Section7"/>
+    </jaxb:bindings>
+    <jaxb:bindings scd="~T_Entete" if-exists="true" auto-acknowledge="true">
+      <jaxb:class ref="generated.TEntete"/>
+    </jaxb:bindings>
+    <jaxb:bindings scd="~T_VersionDoc" if-exists="true" auto-acknowledge="true">
+      <jaxb:typesafeEnumClass ref="generated.TVersionDoc"/>
+    </jaxb:bindings>
+    <jaxb:bindings scd="~T_TypeAction" if-exists="true" auto-acknowledge="true">
+      <jaxb:typesafeEnumClass ref="generated.TTypeAction"/>
+    </jaxb:bindings>
+  </jaxb:bindings>
+</jaxb:bindings>
+
