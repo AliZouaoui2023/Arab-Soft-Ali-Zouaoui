@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<section1>
+    <VersionDocument>version-1.0</VersionDocument>
+    <Entete>
+        <MatriculeFiscal>1234567A</MatriculeFiscal>
+        <RaisonSocial>Banque Exemple</RaisonSocial>
+        <Exercice>2024</Exercice>
+        <ReferenceDeclaration>0</ReferenceDeclaration>
+    </Entete>
+    <ListeComptes>
+        <Compte>
+            <leCompte>
+                <NumCompte>12345678901234567890</NumCompte>
+                <CodType>1</CodType>
+            </leCompte>
+            <IdentiteProprietaireCompte>
+                <NomPrenomRS>John Doe</NomPrenomRS>
+            </IdentiteProprietaireCompte>
+        </Compte>
+    </ListeComptes>
+    <TotauxParDevise>
+        <DetailsDevise>
+            <Devise>TND</Devise>
+            <NombreLigne>1</NombreLigne>
+            <MontantTotal>1000.00</MontantTotal>
+        </DetailsDevise>
+    </TotauxParDevise>
+</section1>
