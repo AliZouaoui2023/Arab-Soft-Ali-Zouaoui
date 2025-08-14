@@ -36,7 +36,12 @@
             <artifactId>jaxb-runtime</artifactId>
             <version>${jaxb.version}</version>
         </dependency>
-        <!-- Retiré jakarta.xml.datatype-api car non nécessaire avec javax.xml.datatype du JDK -->
+        <!-- Driver JDBC pour MySQL -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.33</version> <!-- Utilise la dernière version stable, vérifie sur Maven Central pour la plus récente -->
+        </dependency>
     </dependencies>
 
     <build>

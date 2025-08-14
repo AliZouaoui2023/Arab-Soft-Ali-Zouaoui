@@ -12,14 +12,14 @@ import java.math.BigInteger;
 import java.sql.*;
 import java.util.*;
 
-public class DeclarationGenerator {
+public class DeclarationGeneratorSection2 {
     private static final String URL = "jdbc:mysql://localhost:3306/loi_finances_db";
     private static final String USER = "root";
     private static final String PASSWORD = ""; // Remplace par ton mot de passe si défini
 
     public static void main(String[] args) {
-        Section1 section1 = new Section1();
-        section1.setVersionDocument(TVersionDoc.VERSION_1_0);
+        Section2 section2 = new Section2();
+        section2.setVersionDocument(TVersionDoc.VERSION_1_0);
 
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD)) {
 
@@ -37,14 +37,14 @@ public class DeclarationGenerator {
             XMLGregorianCalendar exerciceCal = DatatypeFactory.newInstance().newXMLGregorianCalendar("2024");
             entete.setExercice(exerciceCal);
             entete.setReferenceDeclaration(1); // Valide selon T_ReferenceDecision
-            section1.setEntete(entete);
+            section2.setEntete(entete);
 
             // Liste des comptes clôturés avec excédents positifs
-            Section1.ListeComptes listeComptes = new Section1.ListeComptes();
+            Section2.ListeComptes listeComptes = new Section2.ListeComptes();
             Map<String, BigDecimal> totalsParDevise = new HashMap<>();
             Map<String, Long> compteParDevise = new HashMap<>();
             try (Statement stmt = conn.createStatement();
-                 ResultSet rs = stmt.executeQuery("SELECT * FROM comptes WHERE montant > 0")) {
+                 ResultSet rs = stmt.executeQuery("SELECT num_compte, cod_type, nom_prenom_rs, montant, devise FROM comptes WHERE statut = 'Clôturé' AND montant > 0")) {
                 int compteCount = 0;
                 while (rs.next()) {
                     byte codType = rs.getByte("cod_type");
@@ -55,77 +55,59 @@ public class DeclarationGenerator {
                         continue;
                     }
 
-                    Section1.ListeComptes.Compte compte = new Section1.ListeComptes.Compte();
-                    Section1.ListeComptes.Compte.LeCompte leCompte = new Section1.ListeComptes.Compte.LeCompte();
+                    Section2.ListeComptes.Compte compte = new Section2.ListeComptes.Compte();
+                    Section2.ListeComptes.Compte.LeCompte leCompte = new Section2.ListeComptes.Compte.LeCompte();
                     leCompte.setNumCompte(rs.getString("num_compte"));
                     leCompte.setCodType(codType);
-                    // Mappage de libelle_cod_type si colonne existe
-                    String libelle = rs.getString("libelle_cod_type");
-                    if (libelle != null && !libelle.isEmpty()) {
-                        leCompte.setLibelleCodType(libelle);
-                    } else if (codType == 9) {
-                        leCompte.setLibelleCodType("Compte spécifique"); // Valeur par défaut pour cod_type = 9
-                    }
                     compte.setLeCompte(leCompte);
 
                     // Configuration de IdentiteProprietaireCompte
-                    Section1.ListeComptes.Compte.IdentiteProprietaireCompte proprietaire = new Section1.ListeComptes.Compte.IdentiteProprietaireCompte();
+                    Section2.ListeComptes.Compte.IdentiteProprietaireCompte proprietaire = new Section2.ListeComptes.Compte.IdentiteProprietaireCompte();
                     proprietaire.setNomPrenomRS(rs.getString("nom_prenom_rs"));
                     compte.setIdentiteProprietaireCompte(proprietaire);
 
-                    // ObligationInfoPub avec date_echeance
-                    Section1.ListeComptes.Compte.ObligationInfoPub obligationInfoPub = new Section1.ListeComptes.Compte.ObligationInfoPub();
-                    String dateEcheance = rs.getString("date_echeance");
-                    obligationInfoPub.setDatePublicationJO(dateEcheance != null ? dateEcheance : "01012025"); // Fallback si NULL
-                    compte.setObligationInfoPub(obligationInfoPub);
-
-                    // PrescriptionCompte avec date_cloture
-                    Section1.ListeComptes.Compte.PrescriptionCompte prescriptionCompte = new Section1.ListeComptes.Compte.PrescriptionCompte();
-                    String dateCloture = rs.getString("date_cloture");
-                    prescriptionCompte.setDatePrescriptionCompte(dateCloture != null ? dateCloture : "01012030"); // Fallback si NULL
-                    compte.setPrescriptionCompte(prescriptionCompte);
-
-                    // Montant
+                    // Ajout des éléments disponibles
                     BigDecimal montant = rs.getBigDecimal("montant") != null ? rs.getBigDecimal("montant") : BigDecimal.ZERO;
                     if (montant.compareTo(BigDecimal.ZERO) <= 0) {
                         System.err.println("Avertissement : Montant invalide (≤ 0) pour le compte " + rs.getString("num_compte") + ". Utilisation de 0.01.");
-                        montant = new BigDecimal("0.01"); // Respecte minExclusive > 0
+                        montant = new BigDecimal("0.01");
                     }
-                    compte.setMontant(montant.toString());
+                    // Décommentez si setMontant est disponible
+                    // compte.setMontant(montant.toString());
 
-                    // Devise et TypeActionDepot
-                    compte.setDevise(rs.getString("devise"));
-                    compte.setTypeActionDepot(TTypeAction.A);
+                    String devise = rs.getString("devise");
+                    if (devise != null) {
+                        compte.setDevise(devise);
+                    }
 
                     listeComptes.getCompte().add(compte);
                     compteCount++;
 
                     // Calcul des totaux et compte par devise
-                    String devise = rs.getString("devise");
                     totalsParDevise.merge(devise, montant, BigDecimal::add);
                     compteParDevise.merge(devise, 1L, Long::sum);
                 }
                 System.out.println("Nombre de comptes traités : " + compteCount);
             }
-            section1.setListeComptes(listeComptes);
+            section2.setListeComptes(listeComptes);
 
             // Configuration des totaux par devise
-            Section1.TotauxParDevise totauxParDevise = new Section1.TotauxParDevise();
+            Section2.TotauxParDevise totauxParDevise = new Section2.TotauxParDevise();
             for (Map.Entry<String, BigDecimal> entry : totalsParDevise.entrySet()) {
-                Section1.TotauxParDevise.DetailsDevise detailsDevise = new Section1.TotauxParDevise.DetailsDevise();
+                Section2.TotauxParDevise.DetailsDevise detailsDevise = new Section2.TotauxParDevise.DetailsDevise();
                 detailsDevise.setDevise(entry.getKey());
                 detailsDevise.setNombreLigne(BigInteger.valueOf(compteParDevise.getOrDefault(entry.getKey(), 0L)));
                 detailsDevise.setMontantTotal(entry.getValue().toString());
                 totauxParDevise.getDetailsDevise().add(detailsDevise);
             }
-            section1.setTotauxParDevise(totauxParDevise);
+            section2.setTotauxParDevise(totauxParDevise);
 
             // Génération du fichier XML
-            JAXBContext context = JAXBContext.newInstance(Section1.class);
+            JAXBContext context = JAXBContext.newInstance(Section2.class);
             Marshaller marshaller = context.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-            String filename = String.format("FDCDSection1_%s_%d.xml", entete.getMatriculeFiscal(), entete.getExercice().getYear());
-            marshaller.marshal(section1, new File(filename));
+            String filename = String.format("FDCDSection2_%s_%d.xml", entete.getMatriculeFiscal(), entete.getExercice().getYear());
+            marshaller.marshal(section2, new File(filename));
             System.out.println("Fichier généré : " + filename + " à " + new java.util.Date());
 
         } catch (Exception e) {

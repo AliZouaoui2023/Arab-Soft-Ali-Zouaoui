@@ -3,26 +3,240 @@
     <VersionDocument>version-1.0</VersionDocument>
     <Entete>
         <MatriculeFiscal>1234567A</MatriculeFiscal>
-        <RaisonSocial>Banque Exemple</RaisonSocial>
+        <RaisonSocial>Banque Nationale Tunisie</RaisonSocial>
         <Exercice>2024</Exercice>
-        <ReferenceDeclaration>0</ReferenceDeclaration>
+        <ReferenceDeclaration>1</ReferenceDeclaration>
     </Entete>
     <ListeComptes>
         <Compte>
             <leCompte>
-                <NumCompte>12345678901234567890</NumCompte>
+                <NumCompte>98765432109876543210</NumCompte>
                 <CodType>1</CodType>
             </leCompte>
             <IdentiteProprietaireCompte>
-                <NomPrenomRS>John Doe</NomPrenomRS>
+                <NomPrenomRS>Ahmed Ben Ali</NomPrenomRS>
             </IdentiteProprietaireCompte>
+            <ObligationInfoPub>
+                <DatePublicationJO>15012020</DatePublicationJO>
+            </ObligationInfoPub>
+            <PrescriptionCompte>
+                <DatePrescriptionCompte>15012015</DatePrescriptionCompte>
+            </PrescriptionCompte>
+            <Montant>1500.75</Montant>
+            <Devise>TND</Devise>
+            <TypeActionDepot>A</TypeActionDepot>
+        </Compte>
+        <Compte>
+            <leCompte>
+                <NumCompte>11223344556677889900</NumCompte>
+                <CodType>2</CodType>
+            </leCompte>
+            <IdentiteProprietaireCompte>
+                <NomPrenomRS>Fatma El Ghali</NomPrenomRS>
+            </IdentiteProprietaireCompte>
+            <ObligationInfoPub>
+                <DatePublicationJO>22032025</DatePublicationJO>
+            </ObligationInfoPub>
+            <PrescriptionCompte>
+                <DatePrescriptionCompte>22032020</DatePrescriptionCompte>
+            </PrescriptionCompte>
+            <Montant>2500.00</Montant>
+            <Devise>TND</Devise>
+            <TypeActionDepot>A</TypeActionDepot>
+        </Compte>
+        <Compte>
+            <leCompte>
+                <NumCompte>22334455667788990011</NumCompte>
+                <CodType>3</CodType>
+            </leCompte>
+            <IdentiteProprietaireCompte>
+                <NomPrenomRS>Mohamed Karim</NomPrenomRS>
+            </IdentiteProprietaireCompte>
+            <ObligationInfoPub>
+                <DatePublicationJO>10072023</DatePublicationJO>
+            </ObligationInfoPub>
+            <PrescriptionCompte>
+                <DatePrescriptionCompte>10072018</DatePrescriptionCompte>
+            </PrescriptionCompte>
+            <Montant>800.50</Montant>
+            <Devise>TND</Devise>
+            <TypeActionDepot>A</TypeActionDepot>
+        </Compte>
+        <Compte>
+            <leCompte>
+                <NumCompte>33445566778899001122</NumCompte>
+                <CodType>4</CodType>
+            </leCompte>
+            <IdentiteProprietaireCompte>
+                <NomPrenomRS>Souad Ben Amor</NomPrenomRS>
+            </IdentiteProprietaireCompte>
+            <ObligationInfoPub>
+                <DatePublicationJO>05112027</DatePublicationJO>
+            </ObligationInfoPub>
+            <PrescriptionCompte>
+                <DatePrescriptionCompte>05112022</DatePrescriptionCompte>
+            </PrescriptionCompte>
+            <Montant>3200.25</Montant>
+            <Devise>TND</Devise>
+            <TypeActionDepot>A</TypeActionDepot>
+        </Compte>
+        <Compte>
+            <leCompte>
+                <NumCompte>44556677889900112233</NumCompte>
+                <CodType>5</CodType>
+            </leCompte>
+            <IdentiteProprietaireCompte>
+                <NomPrenomRS>Hassan Zrelli</NomPrenomRS>
+            </IdentiteProprietaireCompte>
+            <ObligationInfoPub>
+                <DatePublicationJO>01012025</DatePublicationJO>
+            </ObligationInfoPub>
+            <PrescriptionCompte>
+                <DatePrescriptionCompte>01012030</DatePrescriptionCompte>
+            </PrescriptionCompte>
+            <Montant>450.00</Montant>
+            <Devise>EUR</Devise>
+            <TypeActionDepot>A</TypeActionDepot>
+        </Compte>
+        <Compte>
+            <leCompte>
+                <NumCompte>55667788990011223344</NumCompte>
+                <CodType>6</CodType>
+            </leCompte>
+            <IdentiteProprietaireCompte>
+                <NomPrenomRS>Nadia Essid</NomPrenomRS>
+            </IdentiteProprietaireCompte>
+            <ObligationInfoPub>
+                <DatePublicationJO>30092022</DatePublicationJO>
+            </ObligationInfoPub>
+            <PrescriptionCompte>
+                <DatePrescriptionCompte>30092017</DatePrescriptionCompte>
+            </PrescriptionCompte>
+            <Montant>1750.90</Montant>
+            <Devise>TND</Devise>
+            <TypeActionDepot>A</TypeActionDepot>
+        </Compte>
+        <Compte>
+            <leCompte>
+                <NumCompte>66778899001122334455</NumCompte>
+                <CodType>7</CodType>
+            </leCompte>
+            <IdentiteProprietaireCompte>
+                <NomPrenomRS>Youssef Saidi</NomPrenomRS>
+            </IdentiteProprietaireCompte>
+            <ObligationInfoPub>
+                <DatePublicationJO>12062026</DatePublicationJO>
+            </ObligationInfoPub>
+            <PrescriptionCompte>
+                <DatePrescriptionCompte>12062021</DatePrescriptionCompte>
+            </PrescriptionCompte>
+            <Montant>600.00</Montant>
+            <Devise>TND</Devise>
+            <TypeActionDepot>A</TypeActionDepot>
+        </Compte>
+        <Compte>
+            <leCompte>
+                <NumCompte>77889900112233445566</NumCompte>
+                <CodType>9</CodType>
+                <LibelleCodType>Compte spécifique</LibelleCodType>
+            </leCompte>
+            <IdentiteProprietaireCompte>
+                <NomPrenomRS>Lamia Trabelsi</NomPrenomRS>
+            </IdentiteProprietaireCompte>
+            <ObligationInfoPub>
+                <DatePublicationJO>28022029</DatePublicationJO>
+            </ObligationInfoPub>
+            <PrescriptionCompte>
+                <DatePrescriptionCompte>28022024</DatePrescriptionCompte>
+            </PrescriptionCompte>
+            <Montant>980.30</Montant>
+            <Devise>TND</Devise>
+            <TypeActionDepot>A</TypeActionDepot>
+        </Compte>
+        <Compte>
+            <leCompte>
+                <NumCompte>99887766554433221100</NumCompte>
+                <CodType>1</CodType>
+            </leCompte>
+            <IdentiteProprietaireCompte>
+                <NomPrenomRS>Khalil Ben Amor</NomPrenomRS>
+            </IdentiteProprietaireCompte>
+            <ObligationInfoPub>
+                <DatePublicationJO>01012025</DatePublicationJO>
+            </ObligationInfoPub>
+            <PrescriptionCompte>
+                <DatePrescriptionCompte>01012030</DatePrescriptionCompte>
+            </PrescriptionCompte>
+            <Montant>1200.50</Montant>
+            <Devise>TND</Devise>
+            <TypeActionDepot>A</TypeActionDepot>
+        </Compte>
+        <Compte>
+            <leCompte>
+                <NumCompte>88776655443322110099</NumCompte>
+                <CodType>2</CodType>
+            </leCompte>
+            <IdentiteProprietaireCompte>
+                <NomPrenomRS>Sara Haddad</NomPrenomRS>
+            </IdentiteProprietaireCompte>
+            <ObligationInfoPub>
+                <DatePublicationJO>01012025</DatePublicationJO>
+            </ObligationInfoPub>
+            <PrescriptionCompte>
+                <DatePrescriptionCompte>01012030</DatePrescriptionCompte>
+            </PrescriptionCompte>
+            <Montant>3000.00</Montant>
+            <Devise>EUR</Devise>
+            <TypeActionDepot>A</TypeActionDepot>
+        </Compte>
+        <Compte>
+            <leCompte>
+                <NumCompte>77665544332211009988</NumCompte>
+                <CodType>9</CodType>
+                <LibelleCodType>Compte spécifique</LibelleCodType>
+            </leCompte>
+            <IdentiteProprietaireCompte>
+                <NomPrenomRS>Omar El Jdid</NomPrenomRS>
+            </IdentiteProprietaireCompte>
+            <ObligationInfoPub>
+                <DatePublicationJO>20032024</DatePublicationJO>
+            </ObligationInfoPub>
+            <PrescriptionCompte>
+                <DatePrescriptionCompte>20032019</DatePrescriptionCompte>
+            </PrescriptionCompte>
+            <Montant>500.75</Montant>
+            <Devise>TND</Devise>
+            <TypeActionDepot>A</TypeActionDepot>
+        </Compte>
+        <Compte>
+            <leCompte>
+                <NumCompte>66554433221100998877</NumCompte>
+                <CodType>5</CodType>
+            </leCompte>
+            <IdentiteProprietaireCompte>
+                <NomPrenomRS>Leila Ben Salah</NomPrenomRS>
+            </IdentiteProprietaireCompte>
+            <ObligationInfoPub>
+                <DatePublicationJO>01122028</DatePublicationJO>
+            </ObligationInfoPub>
+            <PrescriptionCompte>
+                <DatePrescriptionCompte>01122023</DatePrescriptionCompte>
+            </PrescriptionCompte>
+            <Montant>1800.25</Montant>
+            <Devise>TND</Devise>
+            <TypeActionDepot>A</TypeActionDepot>
         </Compte>
     </ListeComptes>
     <TotauxParDevise>
         <DetailsDevise>
+            <Devise>EUR</Devise>
+            <NombreLigne>2</NombreLigne>
+            <MontantTotal>3450.00</MontantTotal>
+        </DetailsDevise>
+        <DetailsDevise>
             <Devise>TND</Devise>
-            <NombreLigne>1</NombreLigne>
-            <MontantTotal>1000.00</MontantTotal>
+            <NombreLigne>10</NombreLigne>
+            <MontantTotal>14834.20</MontantTotal>
         </DetailsDevise>
     </TotauxParDevise>
 </section1>
